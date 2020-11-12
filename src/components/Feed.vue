@@ -9,11 +9,26 @@
                 </v-card-title>
 
                 <v-card-text>
-                    {{ post.upload_at }}
+                    <div v-if="post.posted">
+                        Posted at:
+                        {{ post.upload_at }}
+                    </div>
+
+                    <div v-else>
+                        Is gonna be posted: 
+                        {{ post.upload_at }}
+                    </div>
+                    
+                    <v-spacer />
+                    <div v-if="post.posted" class="float-right">
+                        ✅
+                    </div>
                 </v-card-text>
 
+                
+
                 <v-card-actions>
-                    <v-btn color="pink accent-3" @click="deletePost(post.id)">
+                    <v-btn color="pink accent-3" @click="deletePost(post.id)" v-if="!post.posted">
                         Delete
                     </v-btn>
                 </v-card-actions>

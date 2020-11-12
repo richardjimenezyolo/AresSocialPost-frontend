@@ -16,6 +16,7 @@
 <script lang="ts">
 import Post from "@/components/Post.vue";
 import Feed from '@/components/Feed.vue';
+
 export default {
   components: { Post, Feed },
   created() {
