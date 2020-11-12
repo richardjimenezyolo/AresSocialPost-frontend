@@ -6,7 +6,7 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-container>
-      <Post />
+      <post />
       <br />
       <feed/>
     </v-container>

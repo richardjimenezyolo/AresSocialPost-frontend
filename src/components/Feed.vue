@@ -15,8 +15,9 @@
                     </div>
 
                     <div v-else>
-                        Is gonna be posted: 
-                        {{ post.upload_at }}
+                        Is gonna be posted on: 
+                        <!-- {{ post.upload_at }} -->
+                        {{ post.since }} min
                     </div>
                     
                     <v-spacer />
@@ -39,6 +40,7 @@
 </template>
 
 <script lang="ts">
+import Day from 'dayjs';
 
 interface post {
     id: number;
@@ -99,6 +101,9 @@ export default {
             const posts: any = await response.json()
 
             posts.forEach( (post: any) => {
+                const now  = Day();
+                const time = post.upload_at;
+                post.since = now.diff(time, 'minute');
                 this.posts.push(post)
             });
 
