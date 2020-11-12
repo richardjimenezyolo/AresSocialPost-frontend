@@ -54,6 +54,8 @@ export default {
       console.log(await response.text());
 
       alert("sended!");
+
+      this.$emit("reload_posts", 1)
     },
 
     discard() {

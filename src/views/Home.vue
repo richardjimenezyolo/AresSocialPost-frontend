@@ -6,9 +6,9 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-container>
-      <post />
+      <post @reload_posts="reload_posts" />
       <br />
-      <feed/>
+      <feed :changes="posts"/>
     </v-container>
   </div>
 </template>
@@ -19,6 +19,11 @@ import Feed from '@/components/Feed.vue';
 
 export default {
   components: { Post, Feed },
+  data() {
+    return {
+      posts: 0
+    }
+  },
   created() {
     const token = localStorage.tokenId;
     console.log(token);
@@ -70,6 +75,13 @@ export default {
       localStorage.setItem("oauth_token", tokens.oauth)
       localStorage.setItem("secret", tokens.secret)
       console.log(tokens);
+    },
+
+    reload_posts(id: number) {
+      console.log(id);
+
+      this.posts += id
+      
     }
   }
 };

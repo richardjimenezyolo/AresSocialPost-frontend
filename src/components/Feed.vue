@@ -10,12 +10,13 @@
 
                 <v-card-text>
                     <div v-if="post.posted">
-                        Posted at:
-                        {{ post.upload_at }}
+                        Posted 
+                        {{ post.since }} min
+                        ago
                     </div>
 
                     <div v-else>
-                        Is gonna be posted on: 
+                        Is gonna be post on: 
                         <!-- {{ post.upload_at }} -->
                         {{ post.since }} min
                     </div>
@@ -49,6 +50,7 @@ interface post {
 }
 
 export default {
+    props: ['changes'],
     created() {
         this.load()
     },
@@ -112,6 +114,12 @@ export default {
     },
     data: () => ({
         posts: [] as post[],
-    })
+    }),
+    watch: {
+        changes() {
+            this.load()
+            console.log("yolo")
+        }
+    }
 }
 </script>
