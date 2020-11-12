@@ -1,0 +1,97 @@
+<template>
+    <div>
+        <h1>Feed: {{ posts.length }}</h1>
+
+        <div v-for="post in posts" :key="post.id">
+            <v-card>
+                <v-card-title>
+                    {{ post.msg }}
+                </v-card-title>
+
+                <v-card-text>
+                    {{ post.upload_at }}
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-btn color="pink accent-3" @click="deletePost(post.id)">
+                        Delete
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </div>
+
+    </div>
+</template>
+
+<script lang="ts">
+
+interface post {
+    id: number;
+    msg: string;
+    upload_at: any;
+}
+
+export default {
+    created() {
+        this.load()
+    },
+    methods: {
+        async deletePost(id: number) {
+
+            const tokenId = localStorage.getItem("tokenId");
+
+            console.log("Deleted!", id);
+
+            const body = {
+                "id": id
+            }
+
+            const response = await fetch("http://localhost:8000/api/del_post", {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": 'application/json',
+                    "Authorization": `Bearer ${tokenId}`
+                },
+                method: "POST",
+                body: JSON.stringify(body)
+            })
+
+            const json = await response.json();
+
+            if (json.code == 200) {
+                // alert("Deleted!");
+
+                this.load()
+            } else {
+                alert("Something went wrong");
+            }
+        },
+
+        async load() {
+            this.posts = []
+
+            const tokenId = localStorage.getItem("tokenId");
+
+            const response = await fetch("http://localhost:8000/api/get_all", {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Accept': 'application/json',
+                    "Authorization": `Bearer ${tokenId}`
+                },
+                method: "POST",
+            });
+
+            const posts: any = await response.json()
+
+            posts.forEach( (post: any) => {
+                this.posts.push(post)
+            });
+
+            this.posts.reverse();
+        },
+    },
+    data: () => ({
+        posts: [] as post[],
+    })
+}
+</script>

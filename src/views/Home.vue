@@ -7,14 +7,17 @@
     </v-toolbar>
     <v-container>
       <Post />
+      <br />
+      <feed/>
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import Post from "@/components/Post.vue";
+import Feed from '@/components/Feed.vue';
 export default {
-  components: { Post },
+  components: { Post, Feed },
   created() {
     const token = localStorage.tokenId;
     console.log(token);
