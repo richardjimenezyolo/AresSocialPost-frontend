@@ -15,7 +15,7 @@
     <v-divider />
 
     <v-card-actions>
-      <v-btn color="pink accent-3">
+      <v-btn color="pink accent-3" @click="discard">
         Discard
       </v-btn>
       <v-spacer />
@@ -54,6 +54,11 @@ export default {
       console.log(await response.text());
 
       alert("sended!");
+    },
+
+    discard() {
+      this.msg = "";
+      this.date = ""
     }
   }
 };
