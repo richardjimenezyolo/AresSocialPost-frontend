@@ -11,14 +11,14 @@
                 <v-card-text>
                     <div v-if="post.posted">
                         Posted 
-                        {{ post.since }} min
+                        {{ post.since }}
                         ago
                     </div>
 
                     <div v-else>
                         Is gonna be post on: 
                         <!-- {{ post.upload_at }} -->
-                        {{ post.since }} min
+                        {{ post.since }}
                     </div>
                     
                     <v-spacer />
@@ -105,7 +105,17 @@ export default {
             posts.forEach( (post: any) => {
                 const now  = Day();
                 const time = post.upload_at;
-                post.since = now.diff(time, 'minute');
+                post.since = now.diff(time, 'minute') + " min"
+
+                console.log(now.diff(time, 'minute'))
+
+                if (now.diff(time, 'minute') == -0) {
+                    console.log("Senconds")
+                    post.since = now.diff(time, 'second') + " Seconds"
+                } else if(now.diff(time, 'minute') >= 60) {
+                    post.since = now.diff(time, 'hour') + " hrs"
+                }
+
                 this.posts.push(post)
             });
 
