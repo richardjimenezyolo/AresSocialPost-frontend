@@ -56,6 +56,9 @@ export default {
       alert("sended!");
 
       this.$emit("reload_posts", 1)
+
+      this.msg = "";
+      this.at = ""
     },
 
     discard() {

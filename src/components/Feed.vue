@@ -107,10 +107,10 @@ export default {
                 const time = post.upload_at;
                 post.since = now.diff(time, 'minute') + " min"
 
-                console.log(now.diff(time, 'minute'))
+                // console.log(now.diff(time, 'minute'))
 
                 if (now.diff(time, 'minute') == -0) {
-                    console.log("Senconds")
+                    // console.log("Senconds")
                     post.since = now.diff(time, 'second') + " Seconds"
                 } else if(now.diff(time, 'minute') >= 60) {
                     post.since = now.diff(time, 'hour') + " hrs"

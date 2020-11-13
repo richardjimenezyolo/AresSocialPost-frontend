@@ -13,7 +13,7 @@
           <h1>Email</h1>
           <v-text-field v-model="email" />
           <h1>Password</h1>
-          <v-text-field v-model="pwd" />
+          <v-text-field v-model="pwd" type="password" />
           <br />
           <v-btn color="pink" class="mx-2" @click="signup">Sign Up</v-btn>
           <v-btn color="primary" @click="login">Login</v-btn>
