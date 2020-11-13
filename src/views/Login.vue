@@ -50,7 +50,9 @@ export default {
 
       console.log(json);
 
-      await this.getTwit();
+      // await this.getTwit();
+
+      location.href = '#/';
 
       // console.log(await this.getTwit());
     },
@@ -82,23 +84,11 @@ export default {
 
       // console.log(await this.getTwit());
 
+      await this.login()
+
     },
 
-    async getTwit() {
-      const url = 'http://localhost:8000/api/getOauthToken';
-      
-      const response = await fetch(url);
-
-      const text = await response.text();
-
-      // RESPONSE: oauth_token=P-F0BgAAAAABJpJxAAABdbx1FwQ&oauth_token_secret=FXzdGJ2GMEaQ7ixtGNUIfw5a1hiM7Sgv&oauth_callback_confirmed=true1
-
-      const oauthToken = text.split("&")[0].replace("oauth_token=", "");
-
-      location.href = `https://api.twitter.com/oauth/authorize?oauth_token=${oauthToken}`;
-
-      // return oauthToken;
-    }
+    
   },
   data: () => ({
     email: "",

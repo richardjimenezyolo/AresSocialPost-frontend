@@ -31,12 +31,17 @@ export default {
     if (!token) {
       alert("You are not registerd!");
       location.href = "#/login";
-    } else {
-      const twitterToken = localStorage.oauth_token;
 
-      if (!twitterToken) {
-        this.SendTokens();
+      
+
+    } else {
+      
+      if (localStorage.oauth_token == undefined) {
+        this.SendTokens()
       }
+
+
+
     }
   },
   methods: {
@@ -44,6 +49,11 @@ export default {
       const url = new URLSearchParams(location.search);
       const oauthToken = url.get("oauth_token");
       const oauthVerifier = url.get("oauth_verifier");
+
+      if (oauthToken == null) {
+        console.log("no params")
+        location.href = '#/register'
+      }
 
       // console.log([oauthToken, oauthVerifier]);
 
